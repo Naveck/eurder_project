@@ -4,7 +4,7 @@ import com.switchfully.eurder.domain.models.Address;
 import com.switchfully.eurder.domain.models.Customer;
 import com.switchfully.eurder.exceptionHandling.exceptions.CustomerNotFoundException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,11 +28,11 @@ import static org.junit.jupiter.api.Assertions.*;
 //}
 
 class CustomerRepositoryTest {
-    private static CustomerRepository customerRepository;
-    private static Customer customer;
+    private CustomerRepository customerRepository;
+    private Customer customer;
 
-    @BeforeAll
-    static void setupTest(){
+    @BeforeEach
+    void setupTest(){
         //Given
         customerRepository = new CustomerRepository();
         customer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
