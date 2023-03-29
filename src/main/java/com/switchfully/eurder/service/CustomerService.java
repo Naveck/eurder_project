@@ -19,7 +19,7 @@ public class CustomerService {
         this.customerMapper = customerMapper;
     }
 
-    public void createMember(CustomerDTO newCustomer) {
+    public void createCustomer(CustomerDTO newCustomer) {
         customerRepository.addCustomer(customerMapper.toDomain(newCustomer));
     }
 

@@ -22,7 +22,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createCustomer(@RequestBody CustomerDTO newCustomer) {
-        customerService.createMember(newCustomer);
+        customerService.createCustomer(newCustomer);
     }
 
     @ResponseStatus(HttpStatus.OK)
