@@ -4,51 +4,53 @@ import com.switchfully.eurder.domain.models.Address;
 import com.switchfully.eurder.domain.models.Customer;
 import com.switchfully.eurder.domain.repositories.CustomerRepository;
 import com.switchfully.eurder.exceptionHandling.exceptions.CustomerNotFoundException;
+import com.switchfully.eurder.service.dtos.CustomerDTO;
 import com.switchfully.eurder.service.mappers.CustomerMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
-class CustomerServiceTest {
-
-    private final CustomerRepository customerRepository = new CustomerRepository();
-    private final CustomerMapper customerMapper = new CustomerMapper();
-    private CustomerService customerService = new CustomerService(customerRepository, customerMapper);
+@ExtendWith(MockitoExtension.class)
+class CustomerServiceTest { //    private final CustomerDTO customerDTO = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
+    @Mock
+    private CustomerRepository customerRepositoryMock;
+    @Mock
+    private CustomerMapper customerMapperMock;
+    @InjectMocks
+    private CustomerService customerService;
+    public static final CustomerDTO CUSTOMER_TO_SAVE_DTO = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
+    public static final Customer CUSTOMER_TO_SAVE = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
 
     @Test
-    void addCustomer_confirmCustomerHasBeenAddedToList() {
-        //Given
-        CustomerRepository customerRepository = new CustomerRepository();
-        Customer customer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
-        //When
-        customerRepository.addCustomer(customer);
-        //Then
-        Assertions.assertTrue(customerRepository.getAllCustomers().contains(customer));
+    void createCustomer_confirmCustomerHasBeenAddedToList() {
+        customerService.createCustomer(CUSTOMER_TO_SAVE_DTO);
+
+        Mockito.verify(customerRepositoryMock).addCustomer(customerMapperMock.toDomain(CUSTOMER_TO_SAVE_DTO));
     }
 
     @Test
-    void getCustomerById_returnsCustomer_WhenIdIsFound() {
-        //Given
-        CustomerRepository customerRepository = new CustomerRepository();
-        Customer customer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
-        //When
-        customerRepository.addCustomer(customer);
-        //Then
-        Assertions.assertEquals(customer, customerRepository.getCustomerById(customer.getId()));
+    void getCustomerById_returnsCustomer_whenIdIsFound() {
+       when(customerRepositoryMock.getCustomerById(CUSTOMER_TO_SAVE.getId())).thenReturn(CUSTOMER_TO_SAVE);
+       when(customerMapperMock.toDTO(CUSTOMER_TO_SAVE)).thenReturn(CUSTOMER_TO_SAVE_DTO);
+
+       CustomerDTO actual = customerService.getCustomerById(CUSTOMER_TO_SAVE.getId());
+
+       Assertions.assertEquals(CUSTOMER_TO_SAVE_DTO, actual);
     }
 
     @Test
-    void getCustomerById_throwsCustomerNotFoundException_WhenIdIsNotFound() {
-        CustomerRepository customerRepository = new CustomerRepository();
+    void getCustomerById_throwsCustomerNotFoundException_whenIdIsNotFound() {
+        when(customerRepositoryMock.getCustomerById(anyString())).thenThrow(CustomerNotFoundException.class);
 
-        Throwable exception = assertThrows(CustomerNotFoundException.class,
-                () -> customerRepository.getCustomerById("1"));
-
-        String expectedMessage = "No customer found for id: 1";
-        String actualMessage = exception.getMessage();
-
-        assertEquals(expectedMessage, actualMessage);
+        assertThrows(CustomerNotFoundException.class,
+                () -> customerService.getCustomerById("1"));
     }
-
 }
