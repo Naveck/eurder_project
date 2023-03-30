@@ -33,7 +33,7 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
-    public CustomerDTO getCustomer(@PathVariable String id){
+    public CustomerDTO getCustomer(@PathVariable String id) {
         return customerService.getCustomerById(id);
     }
 }
