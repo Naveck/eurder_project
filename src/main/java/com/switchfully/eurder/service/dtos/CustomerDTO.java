@@ -2,6 +2,8 @@ package com.switchfully.eurder.service.dtos;
 
 import com.switchfully.eurder.domain.models.Address;
 
+import java.util.Objects;
+
 public class CustomerDTO {
     private String firstName;
     private String lastName;
@@ -55,5 +57,18 @@ public class CustomerDTO {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerDTO that = (CustomerDTO) o;
+        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email, address, phoneNumber);
     }
 }
