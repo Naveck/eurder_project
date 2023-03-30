@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerServiceTest { //    private final CustomerDTO customerDTO = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
+class CustomerServiceTest {
     @Mock
     private CustomerRepository customerRepositoryMock;
     @Mock
