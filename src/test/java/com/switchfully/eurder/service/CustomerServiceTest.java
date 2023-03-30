@@ -38,12 +38,12 @@ class CustomerServiceTest {
 
     @Test
     void getCustomerById_returnsCustomer_whenIdIsFound() {
-       when(customerRepositoryMock.getCustomerById(CUSTOMER_TO_SAVE.getId())).thenReturn(CUSTOMER_TO_SAVE);
-       when(customerMapperMock.toDTO(CUSTOMER_TO_SAVE)).thenReturn(CUSTOMER_TO_SAVE_DTO);
+        when(customerRepositoryMock.getCustomerById(CUSTOMER_TO_SAVE.getId())).thenReturn(CUSTOMER_TO_SAVE);
+        when(customerMapperMock.toDTO(CUSTOMER_TO_SAVE)).thenReturn(CUSTOMER_TO_SAVE_DTO);
 
-       CustomerDTO actual = customerService.getCustomerById(CUSTOMER_TO_SAVE.getId());
+        CustomerDTO actual = customerService.getCustomerById(CUSTOMER_TO_SAVE.getId());
 
-       Assertions.assertEquals(CUSTOMER_TO_SAVE_DTO, actual);
+        Assertions.assertEquals(CUSTOMER_TO_SAVE_DTO, actual);
     }
 
     @Test
