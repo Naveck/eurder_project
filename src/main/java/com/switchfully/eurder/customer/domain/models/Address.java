@@ -1,4 +1,4 @@
-package com.switchfully.eurder.domain.models;
+package com.switchfully.eurder.customer.domain.models;
 
 import java.util.Objects;
 

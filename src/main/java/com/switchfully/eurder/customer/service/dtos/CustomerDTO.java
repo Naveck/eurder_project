@@ -1,6 +1,6 @@
-package com.switchfully.eurder.service.dtos;
+package com.switchfully.eurder.customer.service.dtos;
 
-import com.switchfully.eurder.domain.models.Address;
+import com.switchfully.eurder.customer.domain.models.Address;
 
 import java.util.Objects;
 

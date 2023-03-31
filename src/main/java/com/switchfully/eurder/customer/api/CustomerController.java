@@ -1,7 +1,7 @@
-package com.switchfully.eurder.api;
+package com.switchfully.eurder.customer.api;
 
-import com.switchfully.eurder.service.CustomerService;
-import com.switchfully.eurder.service.dtos.CustomerDTO;
+import com.switchfully.eurder.customer.service.CustomerService;
+import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

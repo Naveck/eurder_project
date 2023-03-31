@@ -1,11 +1,12 @@
-package com.switchfully.eurder.service;
+package com.switchfully.eurder.customer.service;
 
-import com.switchfully.eurder.domain.models.Address;
-import com.switchfully.eurder.domain.models.Customer;
-import com.switchfully.eurder.domain.repositories.CustomerRepository;
-import com.switchfully.eurder.exceptionHandling.exceptions.CustomerNotFoundException;
-import com.switchfully.eurder.service.dtos.CustomerDTO;
-import com.switchfully.eurder.service.mappers.CustomerMapper;
+import com.switchfully.eurder.customer.domain.models.Address;
+import com.switchfully.eurder.customer.domain.models.Customer;
+import com.switchfully.eurder.customer.domain.repositories.CustomerRepository;
+import com.switchfully.eurder.customer.exceptions.CustomerNotFoundException;
+import com.switchfully.eurder.customer.service.CustomerService;
+import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
+import com.switchfully.eurder.customer.service.mappers.CustomerMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

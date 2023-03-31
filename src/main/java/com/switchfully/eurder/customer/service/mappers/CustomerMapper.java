@@ -1,7 +1,7 @@
-package com.switchfully.eurder.service.mappers;
+package com.switchfully.eurder.customer.service.mappers;
 
-import com.switchfully.eurder.domain.models.Customer;
-import com.switchfully.eurder.service.dtos.CustomerDTO;
+import com.switchfully.eurder.customer.domain.models.Customer;
+import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.switchfully.eurder.domain.repositories;
+package com.switchfully.eurder.customer.domain.repositories;
 
-import com.switchfully.eurder.domain.models.Customer;
-import com.switchfully.eurder.exceptionHandling.exceptions.CustomerNotFoundException;
+import com.switchfully.eurder.customer.domain.models.Customer;
+import com.switchfully.eurder.customer.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

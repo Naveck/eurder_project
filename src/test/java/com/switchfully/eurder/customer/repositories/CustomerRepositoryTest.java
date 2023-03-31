@@ -1,13 +1,12 @@
-package com.switchfully.eurder.domain.repositories;
+package com.switchfully.eurder.customer.repositories;
 
-import com.switchfully.eurder.domain.models.Address;
-import com.switchfully.eurder.domain.models.Customer;
-import com.switchfully.eurder.exceptionHandling.exceptions.CustomerNotFoundException;
+import com.switchfully.eurder.customer.domain.models.Address;
+import com.switchfully.eurder.customer.domain.models.Customer;
+import com.switchfully.eurder.customer.domain.repositories.CustomerRepository;
+import com.switchfully.eurder.customer.exceptions.CustomerNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

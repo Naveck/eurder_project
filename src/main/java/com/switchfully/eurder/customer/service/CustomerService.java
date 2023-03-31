@@ -1,8 +1,8 @@
-package com.switchfully.eurder.service;
+package com.switchfully.eurder.customer.service;
 
-import com.switchfully.eurder.domain.repositories.CustomerRepository;
-import com.switchfully.eurder.service.dtos.CustomerDTO;
-import com.switchfully.eurder.service.mappers.CustomerMapper;
+import com.switchfully.eurder.customer.service.mappers.CustomerMapper;
+import com.switchfully.eurder.customer.domain.repositories.CustomerRepository;
+import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
