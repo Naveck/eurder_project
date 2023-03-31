@@ -4,7 +4,6 @@ import com.switchfully.eurder.customer.domain.models.Address;
 import com.switchfully.eurder.customer.domain.models.Customer;
 import com.switchfully.eurder.customer.domain.repositories.CustomerRepository;
 import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
-import com.switchfully.eurder.customer.service.mappers.CustomerMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.Assertions;
@@ -26,18 +25,16 @@ class CustomerControllerIntegrationTest {
     private int port;
 
     @Autowired
-    private CustomerRepository customerRepository;
-
+    private CustomerController customerController;
     @Autowired
-    private CustomerMapper customerMapper;
+    CustomerRepository customerRepository;
 
     @Test
     void whenThereIsOneCustomerInTheRepository_thenICanRetrieveThisCustomerById() {
         // GIVEN
-        Customer newCustomer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
-        customerRepository.addCustomer(newCustomer);
+        //Customer newCustomer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
         CustomerDTO newCustomerDTO = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
-
+        customerController.createCustomer(newCustomerDTO);
 
         // WHEN
         CustomerDTO customer = RestAssured
@@ -48,7 +45,7 @@ class CustomerControllerIntegrationTest {
                 .log().all()
                 .when()
                 .port(port)
-                .get("/customers/" + newCustomer.getId()) // http://localhost:???/contacts/1
+                .get("/customers/" + customerRepository.getAllCustomers().get(0).getId()) // http://localhost:???/contacts/1
                 // THEN
                 .then()
                 .log().all()
@@ -78,7 +75,6 @@ class CustomerControllerIntegrationTest {
 
     @Test
     void whenIPostACustomer_thenTheRepositoryContainsThisCustomer() {
-        Customer newCustomer = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
         CustomerDTO newCustomerDTO = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
         RestAssured
                 .given()
@@ -91,7 +87,7 @@ class CustomerControllerIntegrationTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());
 
-        assertTrue(customerMapper.toDTO(customerRepository.getAllCustomers()).contains(newCustomerDTO));
+        assertTrue(customerController.getAllCustomers().contains(newCustomerDTO));
     }
 
     //@SpringBootTest
@@ -112,10 +108,10 @@ class CustomerControllerIntegrationTest {
 
     @Test
     void whenTheRepositoryContains2Customers_thenICanRetrieveThemViaTheAPI() {
-        Customer newCust1 = new Customer("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
-        Customer newCust2 = new Customer("First2", "Last2", "mail2", new Address("Street2", "123", "Testville", "1234"), "0412345678");
-        customerRepository.addCustomer(newCust1);
-        customerRepository.addCustomer(newCust2);
+        CustomerDTO newCust1 = new CustomerDTO("First", "Last", "mail", new Address("Street", "123", "Testville", "1234"), "0412345678");
+        CustomerDTO newCust2 = new CustomerDTO("First2", "Last2", "mail2", new Address("Street2", "123", "Testville", "1234"), "0412345678");
+        customerController.createCustomer(newCust1);
+        customerController.createCustomer(newCust2);
 
         List<CustomerDTO> list = RestAssured
                 .given()
@@ -131,6 +127,6 @@ class CustomerControllerIntegrationTest {
                 .jsonPath()
                 .getList(".", CustomerDTO.class);
 
-        Assertions.assertThat(list).containsExactlyInAnyOrder(customerMapper.toDTO(newCust1), customerMapper.toDTO(newCust2));
+        Assertions.assertThat(list).containsExactlyInAnyOrder(newCust1, newCust2);
     }
 }
