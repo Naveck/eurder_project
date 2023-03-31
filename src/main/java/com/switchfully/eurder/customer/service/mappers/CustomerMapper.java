@@ -25,7 +25,7 @@ public class CustomerMapper {
                 customer.getPhoneNumber());
     }
 
-    public List<CustomerDTO> toCustomerDTOList(List<Customer> customers) {
+    public List<CustomerDTO> toDTO(List<Customer> customers) {
         return customers.stream()
                 .map(customer -> toDTO(customer))
                 .toList();

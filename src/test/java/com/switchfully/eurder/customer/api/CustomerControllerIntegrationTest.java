@@ -91,7 +91,7 @@ class CustomerControllerIntegrationTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());
 
-        assertTrue(customerMapper.toCustomerDTOList(customerRepository.getAllCustomers()).contains(newCustomerDTO));
+        assertTrue(customerMapper.toDTO(customerRepository.getAllCustomers()).contains(newCustomerDTO));
     }
 
     //@SpringBootTest

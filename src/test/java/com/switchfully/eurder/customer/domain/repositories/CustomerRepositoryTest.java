@@ -1,4 +1,4 @@
-package com.switchfully.eurder.customer.repositories;
+package com.switchfully.eurder.customer.domain.repositories;
 
 import com.switchfully.eurder.customer.domain.models.Address;
 import com.switchfully.eurder.customer.domain.models.Customer;
