@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "items")
 public class ItemController {
@@ -16,6 +18,12 @@ public class ItemController {
     @Autowired
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ItemDTO> getAllItems(){
+        return itemService.getAllItems();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

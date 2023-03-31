@@ -6,6 +6,8 @@ import com.switchfully.eurder.item.service.mappers.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
@@ -19,5 +21,9 @@ public class ItemService {
 
     public void addItem(ItemDTO newItem){
         itemRepository.addItem(itemMapper.toDomain(newItem));
+    }
+
+    public List<ItemDTO> getAllItems(){
+        return itemMapper.toDTO(itemRepository.getAllItems());
     }
 }

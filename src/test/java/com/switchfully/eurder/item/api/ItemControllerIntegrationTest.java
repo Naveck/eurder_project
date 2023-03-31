@@ -1,9 +1,7 @@
 package com.switchfully.eurder.item.api;
 
-import com.switchfully.eurder.item.domain.models.Item;
 import com.switchfully.eurder.item.domain.repositories.ItemRepository;
 import com.switchfully.eurder.item.service.dtos.ItemDTO;
-import com.switchfully.eurder.item.service.mappers.ItemMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
@@ -24,11 +22,10 @@ class ItemControllerIntegrationTest {
     @Autowired
     ItemRepository itemRepository;
     @Autowired
-    ItemMapper itemMapper;
+    ItemController itemController;
 
     @Test
     void whenIPostAnItem_thenTheRepositoryContainsThisItem() {
-        Item newItem = new Item("itemName","someDescription",100.0,1);
         ItemDTO newItemDTO = new ItemDTO("itemName","someDescription",100.0,1);
         RestAssured
                 .given()
@@ -41,7 +38,7 @@ class ItemControllerIntegrationTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value());
 
-        assertTrue(itemMapper.toDTO(itemRepository.getAllItems()).contains(newItemDTO));
+        assertTrue(itemController.getAllItems().contains(newItemDTO));
     }
 
 }
