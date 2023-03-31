@@ -1,7 +1,6 @@
 package com.switchfully.eurder.customer.api;
 
 import com.switchfully.eurder.customer.domain.models.Address;
-import com.switchfully.eurder.customer.domain.models.Customer;
 import com.switchfully.eurder.customer.domain.repositories.CustomerRepository;
 import com.switchfully.eurder.customer.service.dtos.CustomerDTO;
 import io.restassured.RestAssured;
