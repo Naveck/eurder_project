@@ -13,4 +13,8 @@ public class ItemRepository {
     public void addItem (Item newItem){
         itemDatabase.add(newItem);
     }
+
+    public List<Item> getAllItems(){
+        return List.copyOf(itemDatabase);
+    }
 }
